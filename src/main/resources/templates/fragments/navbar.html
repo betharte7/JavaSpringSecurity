@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <h5 style="padding-top: 10px; padding-right: 10px"><i class="bi bi-book-half"></h5></i><a class="navbar-brand" th:href="@{/inicio}"> Biblioteca</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" th:href="@{/inicio}">Inicio</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Libros
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/libro/registrar}">Agregar Libro</a></li>
+                        <li><a class="dropdown-item" th:href="@{/libro/lista}">Ver Libros</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Autores
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/autor/registrar}">Agregar Autor</a></li>
+                        <li><a class="dropdown-item" th:href="@{/autor/lista}">Ver Autores</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Editoriales
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/editorial/registrar}">Agregar Editorial</a></li>
+                        <li><a class="dropdown-item" th:href="@{/editorial/lista}">Ver Editoriales</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ADMIN')" th:if="${session.usuariosession != null}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Usuarios
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/registrar}">Agregar Usuario</a></li>
+                        <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/admin/usuarios}">Ver Usuarios</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Perfil
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/perfil}">Editar Usuario</a></li>
+                        <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:if="${session.usuariosession == null}" href="/registrar">Registrate</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" th:if="${session.usuariosession == null}" href="/login">Login</a>
+                </li>
+            </div>
+        </div>
+    </div>
+</nav>

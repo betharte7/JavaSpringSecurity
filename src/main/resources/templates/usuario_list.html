@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace= "/fragments/head :: head"> </head>
+    <body>
+        <nav th:replace="/fragments/navbar :: nav"> </nav>
+        <div style="padding: 30px; align-content: center; width: 80%">
+        <div>Lista de Usuarios</div>
+        
+         <div th:if="${error != null}">
+            <h5 style="color: red">ERROR!!! :(</h5>
+            <p th:text="${error}"></p>
+        </div>
+
+        <div th:if="${exito != null}">
+            <h5 style="color: green">Éxito!!! :)</h5>
+            <p th:text="${exito}"></p>
+        </div>
+
+        <div style="width: 70%; align-content: center">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Foto Perfil</th>
+                        <th>Rol</th>
+                        <th sec:authorize="hasRole('ADMIN')">Cambiar Rol</th>
+                        <th sec:authorize="hasRole('ADMIN')">Modificar</th>
+                        <th sec:authorize="hasRole('ADMIN')">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody th:each="usuario : ${usuarios}">
+                    <tr>
+                        <th th:text="${usuario.id}"</th>
+                        <th th:text="${usuario.nombre}"></th>
+                        <th> 
+                            <a><img style="width: 200px" th:if="${usuario.imagen != null}" th:src="@{/imagen/perfil/__${usuario.id}__}"></a>                           
+                        </th>
+                        <th th:text="${usuario.rol}"></th>
+                        <th>
+                            <a th:href="@{/admin/modificarRol/__${usuario.id}__}">Cambiar</a>
+                        </th>
+                        <th>
+                            <a th:href="@{usuario/modificar/__${usuario.id}__}">Modificar</a>
+                        </th>
+                        <th>
+                            <a th:href="@{usuario/borrar/__${usuario.id}__}">Eliminar</a>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    </body>
+</html>
